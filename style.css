@@ -1,0 +1,70 @@
+body{
+    background-color: #000000;
+}
+
+.container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #cef2f0;
+    
+    width: 460px;
+    height: 680px;
+    text-align: center;
+    font-family: 'Nunito',sans-serif; 
+}
+
+h1{
+    margin: 12px 0;
+}
+
+.add-elements{
+    margin: 12px 0;  
+}
+
+input{
+    padding: 6px 4px;
+    width: 70%;
+}
+
+button{
+	cursor: pointer;
+    padding: 7px 14px;
+    background-color: #c90000;
+    border-radius: 4px;
+    color: #fafafa;
+	left: 40px
+}
+
+
+
+.element-list{
+    height: 550px;
+    overflow-y: scroll
+}
+
+ul{
+    padding: 15px;
+   
+}
+
+li{
+	cursor: pointer;
+    list-style: none;
+    padding: 10px 5px;
+    background-color: #fff;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.16);
+    border-radius: 3px;
+}
+
+.checked{
+	cursor: pointer;
+    text-decoration: line-through;
+    background-color: #35b54a;
+}
+.element-list li div{
+	width: 90%;
+	display: inline-block;
+}
