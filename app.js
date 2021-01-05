@@ -2,25 +2,41 @@ const btn = document.querySelector("#btn");
 const list = document.querySelector("#list");
 const el = document.getElementsByTagName("li");
 const input = document.querySelector("#input");
+const aaa = document.querySelector ("#butt");
+
+aaa.addEventListener("click", function (event)
+{
+  alert (0)
+});
+
+const ZX = document.getElementsByClassName("XY") [0]
+ZX.addEventListener("click", function (evt) {
+  evt.stopPropagation();
+  evt.returnValue = false;
+  evt.preventDefault();
+ console.log(evt)
+  alert (1)
+});
 
 const focusInput = function () {
   input.focus();
 };
-const zaznaczzrobione = function () {
+const zaznaczzrobione = function (evt) {
+  evt.stopPropagation();
   console.log("jestem zaznaczzrobione");
   console.log(this.parentNode.classList.toggle("checked"));
+  console.log(this.parentNode)
 };
-const zaznaczzrobione1 = function () {
-  //v.parentNode.classList.toggle("checked");
+const zaznaczzrobione1 = function (evt) {
+  console.log(evt);
+  evt.preventDefault();
   console.log("jestem zaznaczzrobione1");
-  this.preventDefault();
   console.log(this.classList.toggle("checked"));
-  //console.log(v.parentNode);
+  console.log(this)
 };
 
 input.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
-    event.preventDefault();
     btn.click();
   }
 });
@@ -31,9 +47,10 @@ btn.onclick = function () {
     alert("Musisz wpisać zadanie");
   } else {
     li = document.createElement("li");
+ 
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
-    div.onclick = zaznaczzrobione;
+    div.addEventListener ("click",zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
 
@@ -51,7 +68,7 @@ btn.onclick = function () {
     deleteButton.innerText = "x";
 
     deleteButton.onclick = function (del) {
-      alert(del);
+     alert(del);
       console.log(del);
       console.log(this);
 
@@ -59,14 +76,14 @@ btn.onclick = function () {
         let item = del.target.parentNode;
         item.remove();
       }
-      focusInput();
+      focusInput(); 
     };
     li.appendChild(deleteButton);
-    focusInput();
+    focusInput(); 
   }
 };
 
-
 window.onload = function () {
+  console.log(ZX)
   focusInput();
 };
