@@ -83,6 +83,7 @@ btn.onclick = function () {
   }
 };
 
+
 window.onload = function () {
   console.log(ZX)
   focusInput();
