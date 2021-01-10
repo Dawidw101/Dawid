@@ -1,26 +1,28 @@
 const btn = document.querySelector("#btn");
+const clear = document.querySelector("#clear");
 const list = document.querySelector("#list");
 const el = document.getElementsByTagName("li");
 const input = document.querySelector("#input");
-const aaa = document.querySelector ("#butt");
+const aaa = document.querySelector("#butt");
 
-aaa.addEventListener("click", function (event)
-{
-  alert (0)
+
+aaa.addEventListener("click", function (event) {
+  alert(0)
 });
 
-const ZX = document.getElementsByClassName("XY") [0]
+const ZX = document.getElementsByClassName("XY")[0]
 ZX.addEventListener("click", function (evt) {
   evt.stopPropagation();
   evt.returnValue = false;
   evt.preventDefault();
- console.log(evt)
-  alert (1)
+  console.log(evt)
+  alert(1)
 });
 
 const focusInput = function () {
   input.focus();
 };
+
 const zaznaczzrobione = function (evt) {
   evt.stopPropagation();
   console.log("jestem zaznaczzrobione");
@@ -47,44 +49,69 @@ btn.onclick = function () {
     alert("Musisz wpisać zadanie");
   } else {
     li = document.createElement("li");
- 
+
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
-    div.addEventListener ("click",zaznaczzrobione);
+    div.addEventListener("click", zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
 
     li.appendChild(div);
     list.appendChild(li);
     input.value = "";
+    let editButton = document.createElement("button");
     let deleteButton = document.createElement("button");
 
     document.querySelectorAll(".selection").onclick = function (event) {
-      console.log(event);
-      console.log("loistoncliktriggerd");
       event.target.classList.toggle("checked");
     };
 
+    editButton.innerText = "Edit";
     deleteButton.innerText = "x";
 
     deleteButton.onclick = function (del) {
-     alert(del);
-      console.log(del);
-      console.log(this);
 
       if (confirm("Are you sure you want to delete task?")) {
         let item = del.target.parentNode;
         item.remove();
+      } else {
+        del.stopPropagation();
       }
-      focusInput(); 
+      focusInput();
     };
+
+////////////////////////////////////////////////////////////////
+
+
+    editButton.onclick = function(v) {
+      div.contentEditable = true;
+      v.stopPropagation();
+    };
+
+
+
+////////////////////////////////////////////////////////////////
+
+
+    li.appendChild(editButton);
+    focusInput();
+
     li.appendChild(deleteButton);
-    focusInput(); 
+    focusInput();
   }
 };
 
-
+clear.onclick = function () {
+  localStorage.clear();
+  location.reload();
+}
 window.onload = function () {
-  console.log(ZX)
   focusInput();
 };
+
+
+//stylowanie
+//clear button && refresh
+//edit button
+//rozdzielenie przycisków
+//anulowanie usunięcia (fixed)
