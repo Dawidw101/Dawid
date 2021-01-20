@@ -84,8 +84,13 @@ btn.onclick = function () {
 
 
     editButton.onclick = function(v) {
-      div.contentEditable = true;
       v.stopPropagation();
+      editButton.innerText = "OK"
+      editButton.style = "background: blue;"
+      div.contentEditable = true;
+      div.focus();
+      //Dalej się zawiesiłem. Chyba potrzebuję teraz zamienić div na input.
+      //Próbowałem pobrać wartość z diva za pomocą inner HTML ale nie mogłem nigdzie znaleźć jak dokładnie to powinno wyglądać.
     };
 
 
@@ -102,16 +107,12 @@ btn.onclick = function () {
 };
 
 clear.onclick = function () {
-  localStorage.clear();
-  location.reload();
+  if (confirm("Are you sure you want to clear list?")) {
+    localStorage.clear();
+    location.reload();
+  }
+  
 }
 window.onload = function () {
   focusInput();
 };
-
-
-//stylowanie
-//clear button && refresh
-//edit button
-//rozdzielenie przycisków
-//anulowanie usunięcia (fixed)
