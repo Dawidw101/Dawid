@@ -93,8 +93,6 @@ btn.onclick = function () {
       //Próbowałem pobrać wartość z diva za pomocą inner HTML ale nie mogłem nigdzie znaleźć jak dokładnie to powinno wyglądać.
     };
 
-
-
 ////////////////////////////////////////////////////////////////
 
 
