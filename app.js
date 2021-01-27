@@ -104,10 +104,17 @@ btn.onclick = function () {
   }
 };
 
-clear.onclick = function () {
+clear.onclick = function (s) {
   if (confirm("Are you sure you want to clear list?")) {
     localStorage.clear();
-    location.reload();
+
+    while (list.firstChild) 
+    {
+      list.removeChild(list.firstChild);
+    }
+    
+    focusInput();
+    //location.reload();
   }
   
 }
