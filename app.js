@@ -19,7 +19,7 @@ ZX.addEventListener("click", function (evt) {
   alert(1)
 });
 
-const focusInput = function () {
+const focusInput = function (input) {
   input.focus();
 };
 
@@ -48,13 +48,14 @@ btn.onclick = function () {
   if (txt == "") {
     alert("Musisz wpisać zadanie");
   } else {
-    li = document.createElement("li");
+    const li = document.createElement("li");
 
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
     div.addEventListener("click", zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
+    div.id = Math.random() * 1000;
 
     li.appendChild(div);
     list.appendChild(li);
@@ -85,22 +86,50 @@ btn.onclick = function () {
 
     editButton.onclick = function(v) {
       v.stopPropagation();
+
+      if (editButton.innerText === "OK") {
+
+        editButton.innerText = "Edit"
+        editButton.style = "background: #c90000;"
+       const input = document.getElementById("input-" + div.id)
+        li.removeChild(input)
+       const el = document.createElement("div")
+       el.innerText = input.value
+       el.id = div.id
+       el.addEventListener("click", zaznaczzrobione1)
+       
+       li.prepend(el)
+
+
+      } else {
+
       editButton.innerText = "OK"
       editButton.style = "background: blue;"
-      div.contentEditable = true;
-      div.focus();
-      //Dalej się zawiesiłem. Chyba potrzebuję teraz zamienić div na input.
-      //Próbowałem pobrać wartość z diva za pomocą inner HTML ale nie mogłem nigdzie znaleźć jak dokładnie to powinno wyglądać.
+      // div.contentEditable = true;
+      // div.focus();
+
+      const el = document.getElementById(div.id)
+      console.log(el.innerText)
+      
+      li.removeChild(el);
+      const input = document.createElement('input');
+      input.value = el.innerText;
+      input.id = "input-" + div.id;
+
+      li.prepend(input)
+      focusInput(input);
+      }
+      
     };
 
 ////////////////////////////////////////////////////////////////
 
 
     li.appendChild(editButton);
-    focusInput();
+    // focusInput();
 
     li.appendChild(deleteButton);
-    focusInput();
+    focusInput(input);
   }
 };
 
@@ -119,5 +148,5 @@ clear.onclick = function (s) {
   
 }
 window.onload = function () {
-  focusInput();
+  focusInput(input);
 };
