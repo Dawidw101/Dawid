@@ -9,8 +9,8 @@ body {
   transform: translate(-50%, -50%);
   background-color: #ffe600;
 
-  width: 36%;
-  height: 95%;
+  width: 40%;
+  height: 97%;
   text-align: center;
   font-family: "Nunito", sans-serif;
 }
@@ -42,7 +42,7 @@ button {
 }
 
 .element-list {
-  height: 85%;
+  height: 82.2%;
   overflow-y: scroll;
 }
 
