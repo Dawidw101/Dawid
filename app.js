@@ -1,26 +1,28 @@
 const btn = document.querySelector("#btn");
+const clear = document.querySelector("#clear");
 const list = document.querySelector("#list");
 const el = document.getElementsByTagName("li");
 const input = document.querySelector("#input");
-const aaa = document.querySelector ("#butt");
+const aaa = document.querySelector("#butt");
 
-aaa.addEventListener("click", function (event)
-{
-  alert (0)
+
+aaa.addEventListener("click", function (event) {
+  alert(0)
 });
 
-const ZX = document.getElementsByClassName("XY") [0]
+const ZX = document.getElementsByClassName("XY")[0]
 ZX.addEventListener("click", function (evt) {
   evt.stopPropagation();
   evt.returnValue = false;
   evt.preventDefault();
- console.log(evt)
-  alert (1)
+  console.log(evt)
+  alert(1)
 });
 
-const focusInput = function () {
+const focusInput = function (input) {
   input.focus();
 };
+
 const zaznaczzrobione = function (evt) {
   evt.stopPropagation();
   console.log("jestem zaznaczzrobione");
@@ -46,44 +48,105 @@ btn.onclick = function () {
   if (txt == "") {
     alert("Musisz wpisać zadanie");
   } else {
-    li = document.createElement("li");
- 
+    const li = document.createElement("li");
+
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
-    div.addEventListener ("click",zaznaczzrobione);
+    div.addEventListener("click", zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
+    div.id = Math.random() * 1000;
 
     li.appendChild(div);
     list.appendChild(li);
     input.value = "";
+    let editButton = document.createElement("button");
     let deleteButton = document.createElement("button");
 
     document.querySelectorAll(".selection").onclick = function (event) {
-      console.log(event);
-      console.log("loistoncliktriggerd");
       event.target.classList.toggle("checked");
     };
 
+    editButton.innerText = "Edit";
     deleteButton.innerText = "x";
 
     deleteButton.onclick = function (del) {
-     alert(del);
-      console.log(del);
-      console.log(this);
 
       if (confirm("Are you sure you want to delete task?")) {
         let item = del.target.parentNode;
         item.remove();
+      } else {
+        del.stopPropagation();
       }
-      focusInput(); 
+      focusInput();
     };
+
+////////////////////////////////////////////////////////////////
+
+
+    editButton.onclick = function(v) {
+      v.stopPropagation();
+
+      if (editButton.innerText === "OK") {
+
+        editButton.innerText = "Edit"
+        editButton.style = "background: #c90000;"
+       const input = document.getElementById("input-" + div.id)
+        li.removeChild(input)
+       const el = document.createElement("div")
+       el.innerText = input.value
+       el.id = div.id
+       el.addEventListener("click", zaznaczzrobione1)
+       
+       li.prepend(el)
+
+
+      } else {
+
+      editButton.innerText = "OK"
+      editButton.style = "background: blue;"
+      // div.contentEditable = true;
+      // div.focus();
+
+      const el = document.getElementById(div.id)
+      console.log(el.innerText)
+      
+      li.removeChild(el);
+      const input = document.createElement('input');
+      input.value = el.innerText;
+      input.id = "input-" + div.id;
+
+      li.prepend(input)
+      focusInput(input);
+      }
+      
+    };
+
+////////////////////////////////////////////////////////////////
+
+
+    li.appendChild(editButton);
+    // focusInput();
+
     li.appendChild(deleteButton);
-    focusInput(); 
+    focusInput(input);
   }
 };
 
+clear.onclick = function (s) {
+  if (confirm("Are you sure you want to clear list?")) {
+    localStorage.clear();
+
+    while (list.firstChild) 
+    {
+      list.removeChild(list.firstChild);
+    }
+    
+    focusInput();
+    //location.reload();
+  }
+  
+}
 window.onload = function () {
-  console.log(ZX)
-  focusInput();
+  focusInput(input);
 };

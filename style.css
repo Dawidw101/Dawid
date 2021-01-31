@@ -1,5 +1,5 @@
 body {
-  background-color: #000000;
+  background-color: #555555;
 }
 
 .container {
@@ -7,16 +7,21 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #cef2f0;
+  background-color: #ffe600;
 
-  width: 460px;
-  height: 680px;
+  width: 40%;
+  height: 97%;
   text-align: center;
   font-family: "Nunito", sans-serif;
 }
 
 h1 {
-  margin: 12px 0;
+  line-height: 60px;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  margin-top: 12px;
+  margin-bottom: 0px;
 }
 
 .add-elements {
@@ -24,7 +29,7 @@ h1 {
 }
 
 input {
-  padding: 6px 4px;
+  padding: 6px;
   width: 70%;
 }
 
@@ -34,22 +39,21 @@ button {
   background-color: #c90000;
   border-radius: 4px;
   color: #fafafa;
-  left: 40px;
 }
 
 .element-list {
-  height: 550px;
+  height: 82.2%;
   overflow-y: scroll;
 }
 
 ul {
-  padding: 15px;
+  padding: 5px;
 }
 
 li {
   cursor: pointer;
   list-style: none;
-  padding: 15px;
+  padding: 5px;
   background-color: #fff;
   margin: 12px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
@@ -59,17 +63,18 @@ li {
 .checked {
   cursor: pointer;
   text-decoration: line-through;
-  background-color: #35b54a;
+  background-color: #028a19;
 }
 
 li.checked .selection {
   text-decoration: line-through;
 }
 .element-list li div {
-  width: 85%;
+  width: 80%;
   display: inline-block;
-  border-color: red;
-  border-width: 1px;
-  border-style: dashed;
-  line-height: 35px;
+}
+
+.element-list li button {
+  background-color: #c90000;
+  margin-right: 8px;
 }
