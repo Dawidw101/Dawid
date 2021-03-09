@@ -48,7 +48,11 @@ btn.onclick = function () {
     alert("Musisz wpisać zadanie");
   } else {
     const li = document.createElement("li");
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 183ff1a6d84d84a368b1626084baad63bcc8f261
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
     div.addEventListener("click", zaznaczzrobione);
@@ -94,6 +98,7 @@ btn.onclick = function () {
         li.removeChild(input)
        const el = document.createElement("div")
        el.innerText = input.value
+<<<<<<< HEAD
        ////////////////////////////////////////////////////////////////if (input.value == "") {
        //////////////////////////////////////////////////////////////// li.remove();
       ////////////////////////////////////////////////////////////////}
@@ -103,10 +108,37 @@ btn.onclick = function () {
        el.onclick = zaznaczzrobione1;
        li.prepend(el)
        
+=======
+       el.id = div.id
+       el.addEventListener("click", zaznaczzrobione1)
+       
+       li.prepend(el)
+
+
+>>>>>>> 183ff1a6d84d84a368b1626084baad63bcc8f261
       } else {
 
       editButton.innerText = "OK"
       editButton.style = "background: blue;"
+<<<<<<< HEAD
+=======
+      // div.contentEditable = true;
+      // div.focus();
+
+      const el = document.getElementById(div.id)
+      console.log(el.innerText)
+      
+      li.removeChild(el);
+      const input = document.createElement('input');
+      input.value = el.innerText;
+      input.id = "input-" + div.id;
+
+      li.prepend(input)
+      focusInput(input);
+      }
+      
+    };
+>>>>>>> 183ff1a6d84d84a368b1626084baad63bcc8f261
 
       const el = document.getElementById(div.id)
       console.log(el.innerText)
@@ -124,6 +156,10 @@ btn.onclick = function () {
 
 
     li.appendChild(editButton);
+<<<<<<< HEAD
+=======
+    // focusInput();
+>>>>>>> 183ff1a6d84d84a368b1626084baad63bcc8f261
 
     li.appendChild(deleteButton);
     focusInput(input);
