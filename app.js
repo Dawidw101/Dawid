@@ -2,7 +2,7 @@ const btn = document.querySelector("#btn");
 const clear = document.querySelector("#clear");
 const list = document.querySelector("#list");
 const el = document.getElementsByTagName("li");
-const input = document.querySelector("#input");
+/////////////////////////////////////////////////////const input0 = document.querySelector("#input");
 const aaa = document.querySelector("#butt");
 
 
@@ -19,7 +19,7 @@ ZX.addEventListener("click", function (evt) {
   alert(1)
 });
 
-const focusInput = function () {
+const focusInput = function (input) {
   input.focus();
 };
 
@@ -31,7 +31,6 @@ const zaznaczzrobione = function (evt) {
 };
 const zaznaczzrobione1 = function (evt) {
   console.log(evt);
-  evt.preventDefault();
   console.log("jestem zaznaczzrobione1");
   console.log(this.classList.toggle("checked"));
   console.log(this)
@@ -48,13 +47,14 @@ btn.onclick = function () {
   if (txt == "") {
     alert("Musisz wpisać zadanie");
   } else {
-    li = document.createElement("li");
-
+    const li = document.createElement("li");
+   
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
     div.addEventListener("click", zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
+    div.id = Math.random() * 1000;
 
     li.appendChild(div);
     list.appendChild(li);
@@ -77,7 +77,7 @@ btn.onclick = function () {
       } else {
         del.stopPropagation();
       }
-      focusInput();
+      focusInput(input);
     };
 
 ////////////////////////////////////////////////////////////////
@@ -85,39 +85,64 @@ btn.onclick = function () {
 
     editButton.onclick = function(v) {
       v.stopPropagation();
+
+      if (editButton.innerText === "OK") {
+
+        editButton.innerText = "Edit"
+        editButton.style = "background: #c90000;"
+       const input = document.getElementById("input-" + div.id)
+        li.removeChild(input)
+       const el = document.createElement("div")
+       el.innerText = input.value
+       ////////////////////////////////////////////////////////////////if (input.value == "") {
+       //////////////////////////////////////////////////////////////// li.remove();
+      ////////////////////////////////////////////////////////////////}
+       el.id = div.id
+       editButton.blur();
+       focusInput(input0);
+       el.onclick = zaznaczzrobione1;
+       li.prepend(el)
+       
+      } else {
+
       editButton.innerText = "OK"
       editButton.style = "background: blue;"
-      div.contentEditable = true;
-      div.focus();
-      //Dalej się zawiesiłem. Chyba potrzebuję teraz zamienić div na input.
-      //Próbowałem pobrać wartość z diva za pomocą inner HTML ale nie mogłem nigdzie znaleźć jak dokładnie to powinno wyglądać.
-    };
 
+      const el = document.getElementById(div.id)
+      console.log(el.innerText)
+      
+      li.removeChild(el);
+      const input = document.createElement('input');
+      input.value = el.innerText;
+      input.id = "input-" + div.id;
+      li.prepend(input)
+      focusInput(input);
+      }
+    };
+    
 ////////////////////////////////////////////////////////////////
 
 
     li.appendChild(editButton);
-    focusInput();
 
     li.appendChild(deleteButton);
-    focusInput();
+    focusInput(input);
   }
 };
 
 clear.onclick = function (s) {
   if (confirm("Are you sure you want to clear list?")) {
-    localStorage.clear();
+    //localStorage.clear();
 
     while (list.firstChild) 
     {
       list.removeChild(list.firstChild);
     }
     
-    focusInput();
-    //location.reload();
+    focusInput(input);
   }
   
 }
 window.onload = function () {
-  focusInput();
+  focusInput(input);
 };
