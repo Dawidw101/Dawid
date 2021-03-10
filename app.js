@@ -2,7 +2,7 @@ const btn = document.querySelector("#btn");
 const clear = document.querySelector("#clear");
 const list = document.querySelector("#list");
 const el = document.getElementsByTagName("li");
-const input = document.querySelector("#input");
+const input0 = document.querySelector("#input");
 const aaa = document.querySelector("#butt");
 
 
@@ -31,7 +31,6 @@ const zaznaczzrobione = function (evt) {
 };
 const zaznaczzrobione1 = function (evt) {
   console.log(evt);
-  evt.preventDefault();
   console.log("jestem zaznaczzrobione1");
   console.log(this.classList.toggle("checked"));
   console.log(this)
@@ -49,10 +48,9 @@ btn.onclick = function () {
     alert("Musisz wpisać zadanie");
   } else {
     const li = document.createElement("li");
-
+   
     li.onclick = zaznaczzrobione1;
     let div = document.createElement("div");
-    div.addEventListener("click", zaznaczzrobione);
     div.className = "selection";
     div.innerText = txt;
     div.id = Math.random() * 1000;
@@ -78,9 +76,8 @@ btn.onclick = function () {
       } else {
         del.stopPropagation();
       }
-      focusInput();
+      focusInput(input);
     };
-
 ////////////////////////////////////////////////////////////////
 
 
@@ -95,38 +92,46 @@ btn.onclick = function () {
         li.removeChild(input)
        const el = document.createElement("div")
        el.innerText = input.value
+       if (input.value == "") {
+        li.remove();
+      }
        el.id = div.id
-       el.addEventListener("click", zaznaczzrobione1)
-       
+       editButton.blur();
+       focusInput(input0);
+       el.classList.add('selection');
        li.prepend(el)
-
-
+       
       } else {
 
       editButton.innerText = "OK"
       editButton.style = "background: blue;"
-      // div.contentEditable = true;
-      // div.focus();
 
       const el = document.getElementById(div.id)
       console.log(el.innerText)
       
       li.removeChild(el);
       const input = document.createElement('input');
+      input.addEventListener("click", function (event) {
+          event.stopPropagation();
+      });
+      
+      input.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          editButton.click();
+        }
+      });
       input.value = el.innerText;
       input.id = "input-" + div.id;
-
       li.prepend(input)
       focusInput(input);
       }
-      
     };
-
+    
 ////////////////////////////////////////////////////////////////
 
 
     li.appendChild(editButton);
-    // focusInput();
+    
 
     li.appendChild(deleteButton);
     focusInput(input);
@@ -135,15 +140,14 @@ btn.onclick = function () {
 
 clear.onclick = function (s) {
   if (confirm("Are you sure you want to clear list?")) {
-    localStorage.clear();
+    //localStorage.clear();
 
     while (list.firstChild) 
     {
       list.removeChild(list.firstChild);
     }
     
-    focusInput();
-    //location.reload();
+    focusInput(input);
   }
   
 }
